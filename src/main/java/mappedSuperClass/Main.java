@@ -1,4 +1,4 @@
-package component;
+package mappedSuperClass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,34 +16,41 @@ public class Main {
 
     public static void main(String[] args) {
 
-        emf = Persistence.createEntityManagerFactory("component", getProperties());
+        emf = Persistence.createEntityManagerFactory("mappedSuperClass", getProperties());
 
-        Student student = new Student();
-        Address address = new Address();
+        Customer customer1 = new Customer();
+        customer1.setName("Jorge");
+        saveOrUpdate(customer1);
 
-        student.setName("Jorge");
-        student.setEmail("jorge@gmail.com");
+        Account account1 = new Account();
+        account1.setBalance(100d);
+        saveOrUpdate(account1);
 
-        address.setCity("Lagoa");
-        address.setStreet("Rua das Laranjas");
-        address.setZipcode("9600-000");
+        Customer customer2 = new Customer();
+        customer2.setName("Fabio");
+        saveOrUpdate(customer2);
 
-        student.setAddress(address);
-        saveOrUpdate(student);
+        Account account2 = new Account();
+        account2.setBalance(300d);
+        saveOrUpdate(account2);
 
-        Student studentToUpdate = findById(1);
-        studentToUpdate.getAddress().setCity("Ponta Delgada");
-        saveOrUpdate(studentToUpdate);
+        Customer updateCustomer1 = (Customer) findById(Customer.class, 1);
+        updateCustomer1.setName("Joao");
+        saveOrUpdate(updateCustomer1);
+
+        Account updateAccount1 = (Account) findById(Account.class, 1);
+        updateAccount1.setBalance(500d);
+        saveOrUpdate(updateAccount1);
 
         emf.close();
     }
 
-    public static Student findById(Integer id) {
+    public static Object findById(Class<?> type, Integer id) {
 
         EntityManager em = emf.createEntityManager();
 
         try {
-            return em.find(Student.class, id);
+            return em.find(type, id);
         } finally {
             if (em != null) {
                 em.close();
@@ -51,16 +58,16 @@ public class Main {
         }
     }
 
-    public static Student saveOrUpdate(Student student) {
+    public static Object saveOrUpdate(Object object) {
 
         EntityManager em = emf.createEntityManager();
 
         try {
 
             em.getTransaction().begin();
-            Student savedStudent = em.merge(student);
+            Object savedObject = em.merge(object);
             em.getTransaction().commit();
-            return savedStudent;
+            return savedObject;
 
         } catch (RollbackException ex) {
 
