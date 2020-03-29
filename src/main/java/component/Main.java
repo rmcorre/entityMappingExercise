@@ -21,18 +21,18 @@ public class Main {
         Student student = new Student();
         Address address = new Address();
 
-        student.setName("Horacio");
-        student.setEmail("horacio@gmail.com");
+        student.setName("Jorge");
+        student.setEmail("jorge@gmail.com");
 
-        address.setCity("Edmonton");
-        address.setStreet("Rua Eng. Hernani Santos, 19");
-        address.setZipcode("9630-202");
+        address.setCity("Lagoa");
+        address.setStreet("Rua das Laranjas");
+        address.setZipcode("9600-000");
 
         student.setAddress(address);
         saveOrUpdate(student);
 
         Student studentToUpdate = findById(1);
-        studentToUpdate.getAddress().setCity("Vila de Nordeste");
+        studentToUpdate.getAddress().setCity("Ponta Delgada");
         saveOrUpdate(studentToUpdate);
 
         emf.close();
