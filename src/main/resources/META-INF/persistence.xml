@@ -47,9 +47,9 @@
 
     <persistence-unit name="tablePerClass" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>singleTable.Vehicle</class>
-        <class>singleTable.Boat</class>
-        <class>singleTable.Car</class>
+        <class>tablePerClass.Vehicle</class>
+        <class>tablePerClass.Boat</class>
+        <class>tablePerClass.Car</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3308/jpa"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
