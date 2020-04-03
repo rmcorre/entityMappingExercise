@@ -29,6 +29,8 @@ public class Main {
         car.setGears(5);
         car.setMaxSpeed(120);
         saveOrUpdate(car);
+
+        emf.close();
     }
 
     public static Object findById(Integer id) {

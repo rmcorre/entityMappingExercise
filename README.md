@@ -12,3 +12,6 @@
 
 ## v0.3.0
 * Implementation of a table-per-class strategy
+
+## v0.3.1
+* Hotfix: Add entity-manager-factory close() method to tablePerClass/Main class
