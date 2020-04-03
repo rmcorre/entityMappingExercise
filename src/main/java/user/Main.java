@@ -1,6 +1,4 @@
-package tablePerClass;
-
-import user.User;
+package user;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,20 +16,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-        emf = Persistence.createEntityManagerFactory("tablePerClass", getProperties());
+        emf = Persistence.createEntityManagerFactory("user", getProperties());
 
-        Boat boat = new Boat();
-        boat.setEngines(2);
-        boat.setMaxSpeed(120);
-        saveOrUpdate(boat);
+        User user1 = new User();
+        user1.setName("Jorge");
+        user1.setEmail("jorge@gmail.com");
+        saveOrUpdate(user1);
 
-        Car car = new Car();
-        car.setGears(5);
-        car.setMaxSpeed(120);
-        saveOrUpdate(car);
+        User user2 = new User();
+        user2.setName("Fabio");
+        user2.setEmail("fabio@gmail.com");
+        saveOrUpdate(user2);
+
+        User userToUpdate = findById(1);
+        userToUpdate.setName("Joao");
+        userToUpdate.setEmail("joao@gmail.com");
+        saveOrUpdate(userToUpdate);
+
+        emf.close();
+
     }
 
-    public static Object findById(Integer id) {
+   public static User findById(Integer id) {
 
         EntityManager em = emf.createEntityManager();
 
@@ -44,14 +50,14 @@ public class Main {
         }
     }
 
-    public static Object saveOrUpdate(Object object) {
+    public static Object saveOrUpdate(User user) {
 
         EntityManager em = emf.createEntityManager();
 
         try {
 
             em.getTransaction().begin();
-            Object savedObject = em.merge(object);
+            User savedObject = em.merge(user);
             em.getTransaction().commit();
             return savedObject;
 
@@ -65,7 +71,7 @@ public class Main {
                 em.close();
             }
         }
-    }
+}
 
     public static Map<String, String> getProperties() {
 
