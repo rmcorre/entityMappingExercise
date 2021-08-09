@@ -1,8 +1,8 @@
 # entityMappingExercise
 ## v0.0.1
 * Implementation of a Student entity with an embeddable Address component
-* Add JPA/Hibernate framework for persistence and configure "component" persistence-unit
-* Add and configure Maven framework for project build
+* Add JPA/Hibernate for persistence and configure "component" persistence-unit
+* Add pom for project build
 
 ## v0.1.0
 * Implementation of a mapped-super-class strategy
